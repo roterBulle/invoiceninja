@@ -1102,7 +1102,10 @@ NINJA.subtotals = function(invoice, hideBalance)
 
     var account = invoice.account;
     var data = [];
-    data.push([{text: invoiceLabels.subtotal, style: ['subtotalsLabel', 'subtotalLabel']}, {text: formatMoneyInvoice(invoice.subtotal_amount, invoice), style: ['subtotals', 'subtotal']}]);
+    /**
+    * ! Remove Subtotal
+*    data.push([{text: invoiceLabels.subtotal, style: ['subtotalsLabel', 'subtotalLabel']}, {text: formatMoneyInvoice(invoice.subtotal_amount, invoice), style: ['subtotals', 'subtotal']}]);
+*/
 
     if (invoice.discount_amount != 0) {
         data.push([{text: invoiceLabels.discount , style: ['subtotalsLabel', 'discountLabel']}, {text: formatMoneyInvoice(invoice.discount_amount, invoice), style: ['subtotals', 'discount']}]);
@@ -1128,7 +1131,15 @@ NINJA.subtotals = function(invoice, hideBalance)
             data.push([{text: taxStr, style: ['subtotalsLabel', 'taxLabel']}, {text: formatMoneyInvoice(taxRate.amount, invoice), style: ['subtotals', 'tax']}]);
         }
     }
-
+	    /**
+    * ! Insert Value without Tax
+    */
+    var total_float = parseFloat(invoice.subtotal_amount).toFixed(2);
+    var tax_float = parseFloat(invoice.tax_amount1).toFixed(2);
+    var true_netto = (total_float - tax_float).toFixed(2);//.replace(".", ",");
+    /**var netto = invoice.subtotal_amount - invoice.tax_amount1 - invoice.tax_amount2;*/
+    data.push([{text: 'Netto', style: ['subtotalsLabel']},{text: formatMoneyInvoice(true_netto, invoice), style: ['subtotals']}]);
+	
     if (parseFloat(invoice.tax_rate1 || 0) != 0 || invoice.tax_name1) {
         var taxStr = invoice.tax_name1 + ' ' + (invoice.tax_rate1*1).toString() + '%';
         data.push([{text: taxStr, style: ['subtotalsLabel', 'tax1Label']}, {text: formatMoneyInvoice(invoice.tax_amount1, invoice), style: ['subtotals', 'tax1']}]);
@@ -1137,7 +1148,6 @@ NINJA.subtotals = function(invoice, hideBalance)
         var taxStr = invoice.tax_name2 + ' ' + (invoice.tax_rate2*1).toString() + '%';
         data.push([{text: taxStr, style: ['subtotalsLabel', 'tax2Label']}, {text: formatMoneyInvoice(invoice.tax_amount2, invoice), style: ['subtotals', 'tax2']}]);
     }
-
     if (customValue1 && invoice.custom_taxes1 != '1') {
         data.push([{text: customValue1Label, style: ['subtotalsLabel', 'custom1Label']}, {text: formatMoneyInvoice(invoice.custom_value1, invoice), style: ['subtotals', 'custom1']}]);
     }
