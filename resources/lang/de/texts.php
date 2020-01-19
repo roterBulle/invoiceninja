@@ -2153,6 +2153,9 @@ Sobald Sie die Beträge erhalten haben, kommen Sie bitte wieder zurück zu diese
     'financial_year_start_help' => 'Verwendet von <b>Datumsbereichsselektoren</b>',
     'reports_help' => 'Umschalt + Klicken, um nach mehreren Spalten zu sortieren, Strg + Klicken, um die Gruppierung zu löschen.',
     'this_year' => 'Dieses Jahr',
+	
+	'TaxRateAmount' => 'Umsatzsteuerübersicht',
+	
 
 	// Updated login screen
 	'ninja_tagline' => 'Erstelle. Sende. Werde bezahlt.',
