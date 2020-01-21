@@ -94,7 +94,7 @@ public function run()
    $expenses = Expense::scope()
                     ->orderBy('expense_date', 'desc')
                     ->withArchived()
-                    ->with('client.contacts', 'vendor', 'expense_category', 'user')
+                    ->with('client.contacts', 'vendor', 'expense_category', 'user') 
                     ->where('expense_date', '>=', $this->startDate)
                     ->where('expense_date', '<=', $this->endDate);
                    
