@@ -69965,7 +69965,8 @@ NINJA.subtotals = function(invoice, hideBalance)
     */
     var total_float = parseFloat(invoice.subtotal_amount).toFixed(2);
     var tax_float = parseFloat(invoice.tax_amount1).toFixed(2);
-    var true_netto = (total_float - tax_float).toFixed(2);//.replace(".", ",");
+	var discount_float = parseFloat(invoice.discount_amount).toFixed(1);
+    var true_netto = (total_float - tax_float - discount_float).toFixed(2);//.replace(".", ",");
     /**var netto = invoice.subtotal_amount - invoice.tax_amount1 - invoice.tax_amount2;*/
     data.push([{text: 'Netto', style: ['subtotalsLabel']},{text: formatMoneyInvoice(true_netto, invoice), style: ['subtotals']}]);
 	
