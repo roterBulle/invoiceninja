@@ -238,6 +238,24 @@
 			</div>
 		</div>
 
+		@if(Auth::user()->eligibleForMigration())
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">{!! trans('texts.migrate_to_next_version') !!}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<label for="modules" class="control-label col-lg-4 col-sm-4"></label>
+						<div class="col-lg-8 col-sm-8">
+							<div class="help-block">{{ trans('texts.migrate_intro_text')}}</div><br/>
+							<a class="btn btn-primary btn-lg"
+						   		href="/migration/start">{!! trans('texts.start_migration') !!}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		@endif
+
 		{!! Former::close() !!}
 
 		@if (! Auth::user()->account->isNinjaOrLicenseAccount())
