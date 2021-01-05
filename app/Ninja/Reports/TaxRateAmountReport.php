@@ -151,8 +151,8 @@ public function run()
                         $hasTaxRates ? round (($expense->taxAmount()  / ($expense->amountWithTax() - $expense->taxAmount() )) * 100 ) . '%' : "",
                         $this->isExport ? $expense->taxAmount() * - 1 : $expense->present()->taxAmount(),
                         $this->isExport ? ( $expense->isPaid() ? $expense->taxAmount() * - 1 : "" ) : Utils::formatMoney($expense->taxAmount() * - 1, $expense->expense_currency_id) ,
-                        $this->isExport ? $expense->amount : $expense->present()->amount(),
-                        $this->isExport ? ( $expense->isPaid() ? $expense->amount : "" ) : ( $expense->isPaid() ? $expense->present()->amount() : "" ),            
+                        $this->isExport ? $expense->amountWithTax() : $expense->present()->amount(),
+                        $this->isExport ? ( $expense->isPaid() ? $expense->amountWithTax() : "" ) : ( $expense->isPaid() ? $expense->present()->amount() : "" ),            
                         ];
     $this->addToTotals($expense->expense_currency_id, 'amount', $expense->taxAmount() * -1 );
     !$expense->isPaid() ?: $this->addToTotals($expense->expense_currency_id, 'paid', $expense->taxAmount() * -1);
