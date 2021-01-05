@@ -623,7 +623,15 @@
 			})
 
 			self.showInvoiceOrPaymentDate = ko.computed(function() {
-				return self.report_type() == '{{ ENTITY_TAX_RATE }}';
+				if (self.report_type() == '{{ ENTITY_TAX_RATE }}')
+				{
+					return self.report_type() == '{{ ENTITY_TAX_RATE }}';
+				}
+				else
+				{
+					return self.report_type() == 'TaxRateAmount';
+				}
+				
 			});
 
 			self.showStatus = ko.computed(function() {
