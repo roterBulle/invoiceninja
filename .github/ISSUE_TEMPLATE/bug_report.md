@@ -9,7 +9,7 @@ assignees: ''
 
 **What version of Invoice Ninja are you running? ie v4.5.25 / v5.0.30**
 
-**What environment are you running?
+**What environment are you running?**
 Docker
 Shared Hosting
 ZIP
@@ -35,3 +35,5 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+Note: Before posting don't forget to check our "Troubleshooting" category in the [docs](https://invoiceninja.github.io/docs/self-host-troubleshooting/) (https://invoiceninja.github.io/docs/self-host-troubleshooting/).
