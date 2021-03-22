@@ -149,10 +149,10 @@ public function run()
                         $expense->present()->payment_date(),
                         "",
                         ($hasTaxRates == true) && (($expense->amountWithTax() - $expense->taxAmount() ) <> 0) ? round (($expense->taxAmount()  / ($expense->amountWithTax() - $expense->taxAmount() )) * 100 ) . '%' : "",
-                        $expense->present()->taxAmount(),
-                        Utils::formatMoney($expense->taxAmount() * - 1, $expense->expense_currency_id) ,
-                        $expense->present()->amount(),
-                        ( $expense->isPaid() ? $expense->present()->amount() : "" ),            
+                        $this->isExport ? $expense->taxAmount() * - 1 : $expense->present()->taxAmount(),
+                        $this->isExport ? ( $expense->isPaid() ? $expense->taxAmount() * - 1 : "" ) : Utils::formatMoney($expense->taxAmount() * - 1, $expense->expense_currency_id) ,
+                        $this->isExport ? $expense->amountWithTax() : $expense->present()->amount(),
+                        $this->isExport ? ( $expense->isPaid() ? $expense->amountWithTax() : "" ) : ( $expense->isPaid() ? $expense->present()->amount() : "" ),            
                         ];
     $this->addToTotals($expense->expense_currency_id, 'amount', $expense->taxAmount() * -1 );
     !$expense->isPaid() ?: $this->addToTotals($expense->expense_currency_id, 'paid', $expense->taxAmount() * -1);
